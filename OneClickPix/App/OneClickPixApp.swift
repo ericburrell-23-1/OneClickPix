@@ -12,6 +12,7 @@ struct OneClickPixApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(ShoppingCart())
         }
     }
 }
