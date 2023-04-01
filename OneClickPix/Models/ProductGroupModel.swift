@@ -9,10 +9,15 @@ import Foundation
 
 struct ProductGroup: Codable, Identifiable {
     let _id: String
-    var id: String { return _id }
+    var id: String { _id }
     let name: String
     let description: String
-    let image: String
+    let imageName: String?
     
-    var imageURL: URL? { return URL(string: "http://\(serverIP)/images/marketing/productGroups/\(image)") }
+    var imageURL: URL? {
+        if (imageName != nil) {
+            return URL(string: "http://\(serverIP)/images/marketing/productGroups/\(imageName!)")
+        }
+        return URL(string: "")
+    }
 }

@@ -13,6 +13,7 @@ struct OneClickPixApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(ShoppingCart())
+                .environmentObject(ProductList())
         }
     }
 }

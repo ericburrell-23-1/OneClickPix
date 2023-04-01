@@ -68,6 +68,7 @@ struct NavigationBarView: View {
 struct NavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationBarView()
+            .environmentObject(ShoppingCart())
             .previewLayout(.sizeThatFits)
             .padding()
     }

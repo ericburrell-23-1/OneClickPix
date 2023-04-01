@@ -10,7 +10,7 @@ import SwiftUI
 struct CartView: View {
     // MARK: - PROPERTIES
     
-    @State var cart: Cart = emptyCart
+    @EnvironmentObject var shoppingCart: ShoppingCart
     
     // MARK: - BODY
     var body: some View {
@@ -22,13 +22,13 @@ struct CartView: View {
                     .padding(.top, topSafeAreaPaddingLength)
                     .background(.black)
                     .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
-                List(cart.items) { item in
+                List(shoppingCart.cart.items) { item in
                     CartItemView(item: item)
                 }
                 .task {
                     await loadCart { refreshedCart in
-                        cart = refreshedCart
-                        print(cart)
+                        shoppingCart.cart = refreshedCart
+                        print(shoppingCart.cart)
                     }
                 }
             }
@@ -40,6 +40,7 @@ struct CartView: View {
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
         CartView()
+            .environmentObject(ShoppingCart())
             .previewLayout(.sizeThatFits)
             .padding()
     }

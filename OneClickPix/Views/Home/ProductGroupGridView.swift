@@ -15,16 +15,16 @@ struct ProductGroupGridView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: gridLayout, alignment: .center, spacing: columnSpacing, pinnedViews: []) {
                 Section(content: {
-                    ForEach(productGroups) { productGroup in
+                    ForEach(sampleProductGroups) { productGroup in
                         ProductGroupItemView(productGroup: productGroup)
                     } //: LOOP
                 },
                         header: { GridHeaderFooterView(rotateClockwise: false) },
                         footer: { GridHeaderFooterView(rotateClockwise: true) })
             } //: GRID
-            .frame(height: 280)
+            .frame(height: 400)
             .padding(.horizontal, 25)
-            .padding(.vertical, 25)
+            .padding(.vertical, 10)
         } //: SCROLL
     }
 }

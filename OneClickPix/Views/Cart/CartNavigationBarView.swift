@@ -10,26 +10,19 @@ import SwiftUI
 struct CartNavigationBarView: View {
     // MARK: - PROPERTIES
     @State private var isAnimated: Bool = false
-    @State private var cartIsEmpty: Bool = true
     @EnvironmentObject var shoppingCart: ShoppingCart
 
     // MARK: - BODY
     var body: some View {
         HStack {
             Button(action: {
-                //cartIsEmpty.toggle()
                 shoppingCart.showCart = false
             }, label: {
                 ZStack {
                     Image(systemName: "arrow.uturn.backward")
                         .font(.title)
                         .foregroundColor(.white)
-                    
-                    Circle()
-                        .fill(Color.red)
-                        .frame(width: 14, height: 14, alignment: .center)
-                        .offset(x: 13, y: -10)
-                        .opacity(cartIsEmpty ? 0 : 1)
+
                 } //: ZSTACK
             }) //: BUTTON
             
@@ -46,7 +39,11 @@ struct CartNavigationBarView: View {
             
             Spacer()
             
-            Button(action: {}, label: {
+            Button(action: {
+                clearCart { refreshedCart in
+                    shoppingCart.cart = refreshedCart
+                }
+            }, label: {
                 Image(systemName: "trash")
                     .font(.title)
                     .foregroundColor(.white)
@@ -58,6 +55,7 @@ struct CartNavigationBarView: View {
 struct CartNavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
         CartNavigationBarView()
+            .environmentObject(ShoppingCart())
             .previewLayout(.sizeThatFits)
             .padding()
     }

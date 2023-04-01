@@ -21,9 +21,13 @@ struct Cart: Codable, Identifiable {
     }
 }
 
+let emptyCart = Cart(_id: "", items: [], cartDate: "")
+
 class ShoppingCart: ObservableObject {
     @Published var showCart: Bool = false
-    @Published var quantity: Int = 0
+    @Published var loadedAtStartup: Bool = false
+    @Published var cart: Cart = emptyCart
+    var quantity: Int {
+        return cart.totalItemQuantity
+    }
 }
-
-let emptyCart = Cart(_id: "", items: [], cartDate: "")

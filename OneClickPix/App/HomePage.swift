@@ -11,6 +11,7 @@ struct HomePage: View {
     // MARK: - PROPERTIES
     
     //@Environment(\.refresh) private var refresh
+    @EnvironmentObject var shoppingCart: ShoppingCart
     
     // MARK: - BODY
     var body: some View {
@@ -22,15 +23,23 @@ struct HomePage: View {
                     .padding(.top, topSafeAreaPaddingLength)
                     .background(.black)
                     .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
+                    .task {
+                        if !shoppingCart.loadedAtStartup {
+                            await loadCart { refreshedCart in
+                                shoppingCart.cart = refreshedCart
+                                shoppingCart.loadedAtStartup = true
+                                print(shoppingCart.cart)
+                            }
+                        }
+                    }
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 0) {
                         CoverImagesTabView()
-//                            .task {
-//                                await getImageNames(forEndpoint: "/api/offerings/marketing")
-//                            }
                             .frame(height: UIScreen.main.bounds.width / 1.175)
-                            .padding(.vertical, 20)
+                            .padding(.bottom, 20)
+                        
+                        SectionHeaderView(title: "What type of prints can we make for you today?")
                         
                         ProductGroupGridView()
                         
@@ -47,8 +56,14 @@ struct HomePage: View {
     // MARK: - PREVIEW
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage()
-            .previewDevice("iPhone 11")
-            .padding()
+        TabView {
+            HomePage()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
+                .environmentObject(ShoppingCart())
+                .previewDevice("iPhone 11")
+        }
     }
 }

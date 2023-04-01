@@ -7,16 +7,20 @@
 
 import SwiftUI
 
-struct Product: Codable {
-    var _id: String
-    var name: String
-    var description: String
-    var imageName: String
-    var productGroups: [String]
-    var productSizes: [String]
-    var priceList: [Float]
-}
+struct Product: Codable, Identifiable {
+    let _id: String
+    let name: String
+    let description: String
+    let imageName: String?
+    let productGroups: [ProductGroup]
+    let productSizes: [ProductSize]
+    let priceList: [Float]
 
-class ProductList: ObservableObject {
-    @Published var Products = [Product]()
+    var id: String { _id }
+//    var image: Image {
+//        if imageName != nil {
+//            return ImageFromURLString(urlString: "http://\(serverIP)/images/marketing/products/\(imageName!)")
+//        }
+//        return Image(systemName: "exclamationmark.square")
+//    }
 }

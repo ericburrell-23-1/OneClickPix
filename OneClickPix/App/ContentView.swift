@@ -17,10 +17,10 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
-            HomePage()
+            ProductsView()
                 .tabItem {
                     Image(systemName: "bag.circle.fill")
-                    Text("Product")
+                    Text("Products")
                 }
             //.navigationTitle("New Product")
             CreateOrderView()
@@ -38,5 +38,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ShoppingCart())
+            .environmentObject(ProductList())
     }
 }

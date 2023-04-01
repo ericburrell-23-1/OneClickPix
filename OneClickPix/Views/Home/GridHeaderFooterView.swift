@@ -17,7 +17,7 @@ struct GridHeaderFooterView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                Text("Product Groups".uppercased())
+                Text("Print categories".uppercased())
                     .font(.footnote)
                     .fontWeight(.black)
                     .foregroundColor(.white)

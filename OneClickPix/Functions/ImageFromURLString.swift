@@ -15,6 +15,6 @@ func ImageFromURLString(urlString: String) -> Image {
         let image = Image(uiImage: uiImage)
         return image
     } catch {
-        return Image(systemName: "exclamationmark.circle")
+        return Image(systemName: "exclamationmark.square")
     }
 }

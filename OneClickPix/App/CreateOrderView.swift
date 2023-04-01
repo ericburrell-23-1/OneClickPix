@@ -66,8 +66,8 @@ struct CreateOrderView: View {
                     Button(action: {
                         // Send the new product to the server
                         customerOrder.imageURL = itemImageURL?.absoluteString ?? "N/A"
-                        addToCart(item: customerOrder) { newCartTotal in
-                            shoppingCart.quantity = newCartTotal
+                        addToCart(item: customerOrder) { refreshedCart in
+                            shoppingCart.cart = refreshedCart
                         }
                     }, label: {
                         Text("Add To Cart")

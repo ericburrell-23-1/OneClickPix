@@ -28,7 +28,7 @@ struct CoverImageView: View {
 // MARK: - PREVIEW
 struct CoverImageView_Previews: PreviewProvider {
     static var previews: some View {
-        CoverImageView(coverImage: coverImageNames[0])
+        CoverImageView(coverImage: "photoGifts.png")
             .previewLayout(.sizeThatFits)
             .padding()
             .background(colorBackground)

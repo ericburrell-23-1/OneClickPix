@@ -16,14 +16,13 @@ struct ProductGroupItemView: View {
     // MARK: - BODY
     var body: some View {
         Button(action: {}) {
-            HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .center, spacing: 12) {
                 CachedAsyncImage(url: productGroup.imageURL, content: { image in
                     image
-                        //.renderingMode(.template)
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(8)
-                        .frame(width: 100, height: 80, alignment: .center)
+                        .frame(width: 156, height: 116, alignment: .center)
                         .foregroundColor(.gray)
                     
                 }, placeholder: {
@@ -36,14 +35,12 @@ struct ProductGroupItemView: View {
                 })
                 
                 Text(productGroup.name.uppercased())
-                    .padding(.vertical, 25)
-                    .font(.system(size: 500))
+                    .font(.system(size: 20))
                     .minimumScaleFactor(0.05)
                     .foregroundColor(colorLightGray)
                     .lineLimit(1)
                 
-                Spacer()
-            } //: HSTACK
+            } //: VSTACK
             .padding()
             .background(Color.black.cornerRadius(12))
             .background(RoundedRectangle(cornerRadius: 12)
@@ -55,7 +52,7 @@ struct ProductGroupItemView: View {
     // MARK: - PREVIEW
 struct ProductGroupItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductGroupItemView(productGroup: productGroups[0])
+        ProductGroupItemView(productGroup: sampleProductGroups[0])
             .previewLayout(.sizeThatFits)
             .padding()
             .background(colorBackground)
