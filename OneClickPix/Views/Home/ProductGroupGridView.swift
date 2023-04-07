@@ -9,23 +9,27 @@ import SwiftUI
 
 struct ProductGroupGridView: View {
     // MARK: - PROPERTIES
+    
+    @EnvironmentObject var productList: ProductList
 
     // MARK: - BODY
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: gridLayout, alignment: .center, spacing: columnSpacing, pinnedViews: []) {
-                Section(content: {
-                    ForEach(sampleProductGroups) { productGroup in
-                        ProductGroupItemView(productGroup: productGroup)
-                    } //: LOOP
-                },
-                        header: { GridHeaderFooterView(rotateClockwise: false) },
-                        footer: { GridHeaderFooterView(rotateClockwise: true) })
-            } //: GRID
-            .frame(height: 400)
-            .padding(.horizontal, 25)
-            .padding(.vertical, 10)
-        } //: SCROLL
+        if productList.loadedAtStartup {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: gridLayout, alignment: .center, spacing: columnSpacing, pinnedViews: []) {
+                    Section(content: {
+                        ForEach(productList.productGroups) { productGroup in
+                            ProductGroupItemView(productGroup: productGroup)
+                        } //: LOOP
+                    },
+                            header: { GridHeaderFooterView(rotateClockwise: false) },
+                            footer: { GridHeaderFooterView(rotateClockwise: true) })
+                } //: GRID
+                .frame(height: 400)
+                .padding(.horizontal, 25)
+                .padding(.vertical, 10)
+            } //: SCROLL
+        } else { ProgressView() }
     }
 }
 
@@ -33,6 +37,7 @@ struct ProductGroupGridView: View {
 struct ProductGroupGridView_Previews: PreviewProvider {
     static var previews: some View {
         ProductGroupGridView()
+            .environmentObject(ProductList())
             .previewLayout(.sizeThatFits)
             .padding()
             .background(colorBackground)

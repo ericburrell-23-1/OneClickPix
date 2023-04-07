@@ -15,18 +15,18 @@ struct ProductsView: View {
     // MARK: - BODY
     var body: some View {
         VStack {
-            List(productList.Products) { product in
+            List(productList.products) { product in
                 ProductItemView(product: product)
             }
         }
-        .task {
-            if !productList.loadedAtStartup {
-                getProductList { products in
-                    productList.Products = products
-                }
-                productList.loadedAtStartup = true
-            }
-        }
+//        .task {
+//            if !productList.loadedAtStartup {
+//                getProductList { products in
+//                    productList.products = products
+//                }
+//                productList.loadedAtStartup = true
+//            }
+//        }
     }
 }
 

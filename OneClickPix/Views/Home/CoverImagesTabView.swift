@@ -10,25 +10,21 @@ import SwiftUI
 struct CoverImagesTabView: View {
     // MARK: - PROPERTIES
     
-    @StateObject private var coverImages = CoverImages()
+    @StateObject private var marketingMaterials = MarketingMaterials()
 
     // MARK: - BODY
     var body: some View {
-        TabView {
-            ForEach(coverImages.names, id: \.self) { coverImage in
-                CoverImageView(coverImage: coverImage)
-                    .padding(.top, 10)
-                    .padding(.horizontal, 15)
-            } //: LOOP
-        } //: TAB
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        .task {
-            if !coverImages.loadedAtStartup {
-                getCoverImageNames { imageNames in
-                    coverImages.names = imageNames
-                    coverImages.loadedAtStartup = true
-                }
-            }
+        if (marketingMaterials.loadedAtStartup) {
+            TabView {
+                ForEach(marketingMaterials.coverImages, id: \.self) { coverImage in
+                    CoverImageView(coverImage: coverImage)
+                        .padding(.top, 10)
+                        .padding(.horizontal, 15)
+                } //: LOOP
+            } //: TAB
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        } else {
+            ProgressView()
         }
     }
 }

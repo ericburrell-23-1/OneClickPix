@@ -10,24 +10,25 @@ import SwiftUI
 struct ProductItemView: View {
     // MARK: - PROPERTIES
     
+    @EnvironmentObject var productList: ProductList
+    
     let product: Product
     
     // MARK: - BODY
     var body: some View {
         VStack(alignment: .leading) {
-            if product.imageName != nil {
-                AsyncImage(url: URL(string:"http://\(serverIP)/images/marketing/products/\(product.imageName!)"), content: { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        //.cornerRadius(12)
-                }, placeholder: {
-                    Image(systemName: "photo.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
-                })
+            if let productImage = productList.productImages[product.id] {
+                Image(uiImage: productImage)
+                    .resizable()
+                    .scaledToFit()
+                //.cornerRadius(12)
+            } else {
+                Image(systemName: "photo.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
             }
+            
             Text(product.name)
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -41,7 +42,6 @@ struct ProductItemView: View {
                 .padding(.horizontal, 15)
             
             Spacer()
-            
         }
         .foregroundColor(.white)
         .background(colorBackground)

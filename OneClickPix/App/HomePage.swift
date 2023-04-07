@@ -12,6 +12,7 @@ struct HomePage: View {
     
     //@Environment(\.refresh) private var refresh
     @EnvironmentObject var shoppingCart: ShoppingCart
+    @EnvironmentObject var productList: ProductList
     
     // MARK: - BODY
     var body: some View {

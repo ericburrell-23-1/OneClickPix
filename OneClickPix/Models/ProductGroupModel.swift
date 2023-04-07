@@ -5,19 +5,18 @@
 //  Created by Eric Burrell on 2/23/23.
 //
 
-import Foundation
+import SwiftUI
 
 struct ProductGroup: Codable, Identifiable {
     let _id: String
-    var id: String { _id }
     let name: String
     let description: String
     let imageName: String?
     
-    var imageURL: URL? {
+    var id: String { _id }
+    var imageURLString: String {
         if (imageName != nil) {
-            return URL(string: "http://\(serverIP)/images/marketing/productGroups/\(imageName!)")
-        }
-        return URL(string: "")
+            return "http://\(serverIP)/images/marketing/productGroups/\(imageName!)"
+        };  return ""
     }
 }

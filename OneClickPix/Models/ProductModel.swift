@@ -17,10 +17,9 @@ struct Product: Codable, Identifiable {
     let priceList: [Float]
 
     var id: String { _id }
-//    var image: Image {
-//        if imageName != nil {
-//            return ImageFromURLString(urlString: "http://\(serverIP)/images/marketing/products/\(imageName!)")
-//        }
-//        return Image(systemName: "exclamationmark.square")
-//    }
+    var imageURLString: String {
+        if (imageName != nil) {
+            return "http://\(serverIP)/images/marketing/products/\(imageName!)"
+        };  return ""
+    }
 }
